@@ -33,7 +33,29 @@ def AjaxTable(request):
     flag+=1
     return JsonResponse(res)
 
+@csrf_exempt
 def renew(request):
-    
-    return render(request,'buttons.html',locals())
+    print('进入函数!')
+    if request.method== "GET":
+        print("get方式无法更新数据！")
+        #return JsonResponse({})
+        return render(request, 'buttons.html', locals())
+
+    elif request.method== "POST":
+        try:
+            key=request.POST["key"]
+        except:
+            key=None
+
+        if key!="ok":
+            print("验证错误！")
+        else:
+            print("成功！")
+            datalist=request.POST['data']
+            print(datalist)
+            for item in datalist:
+                print(item)
+                #print(datalist[item])
+            return render(request,'buttons.html',locals())
+
 
