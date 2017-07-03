@@ -1,9 +1,17 @@
 #!/usr/bin/env python
 import os
 import sys
-
+import web_project.Pdata
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "software.settings")
+    #add the array
+
+    web_project.Pdata.Pdata['roomN']='--'
+    for m in range(0,4):
+        for n in range(0,6):
+            web_project.Pdata.Pdata["%d%d"%(m,n)]='--'
+    web_project.Pdata.Pdata['roomS']='--'
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

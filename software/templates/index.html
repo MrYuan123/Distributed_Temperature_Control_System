@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="lim">{{ lim }}</div>
-                                    <div>客户机总数</div>
+                                    <div>工作客户机总数</div>
                                 </div>
                             </div>
                         </div>
@@ -112,8 +112,8 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">1</div>
-                                    <div>工作客户机总数</div>
+                                    <div class="huge" id='lim2'>{{ lim2 }}</div>
+                                    <div>休眠客户机总数</div>
                                 </div>
                             </div>
                         </div>
@@ -128,8 +128,8 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">5</div>
-                                    <div>待机总数</div>
+                                    <div class="huge">4</div>
+                                    <div>客户机总数</div>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,11 @@
 												<small>(开/关)</small>
                                             </th>
                                             <th>
-                                                温度<br/>
+                                                目标温度<br/>
+                                                <small>[5,35](℃)</small>
+                                            </th>
+											<th>
+                                                当前温度<br/>
                                                 <small>[5,35](℃)</small>
                                             </th>
                                             <th>
@@ -228,15 +232,24 @@
 																htmlstr=htmlstr+'<tr>'+
 																	'<th>'+data.rooms[i].number+'</th>'+
 																	'<th>'+data.rooms[i].state+'</th>'+
-																	'<td>'+data.rooms[i].temp+'</td>'+
+																	'<td>'+data.rooms[i].Ptemp+'</td>'+
+																	'<td>'+data.rooms[i].Ntemp+'</td>'+
 																	'<td>'+data.rooms[i].speed+'</td>'+
 																	'<td>'+data.rooms[i].fee+'</td>'+
 																'</tr>'
 															}
-															htmlstr=htmlstr+"<tr><th>主机状态</th><td colspan=\"4\">"+data.flag+"</td></tr>"
+															htmlstr=htmlstr+"<tr><th>主机状态</th><td colspan=\"5\">"+data.flag+"</td></tr>"
 															//htmlstr=htmlstr+"<tr><th>306</th><td>"+"--"+"</td><td>--</td><td>--</td><td>--</td><tr>"
 															$("#Mtable").children("tbody").html(htmlstr);
 															$("#lim").text(data.lim);
+															if (data.lim=='--')
+															{
+															$("#lim2").text(data.lim);
+															}
+															else
+															{
+															$("#lim2").text(4-Number(data.lim));
+															}
 															
 														},
 														error: function (jqXHR, textStatus, errorThrown) {
